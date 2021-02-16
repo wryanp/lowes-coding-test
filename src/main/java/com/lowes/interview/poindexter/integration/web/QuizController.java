@@ -1,4 +1,4 @@
-package com.lowes.interview.poindexter.web;
+package com.lowes.interview.poindexter.integration.web;
 
 import com.lowes.interview.poindexter.model.response.QuizResponse;
 import com.lowes.interview.poindexter.services.quiz.QuizService;
@@ -36,7 +36,7 @@ public class QuizController {
     public ResponseEntity<Map<String, List<QuizResponse>>> getQuizzes() {
         try {
             return Optional
-                    .of(Collections.singletonMap("quiz", quizService.getQuizzes()))
+                    .ofNullable(Collections.singletonMap("quiz", quizService.getQuizzes()))
                     .map(quizzes -> ResponseEntity.ok().body(quizzes))
                     .orElseGet(() -> ResponseEntity.notFound().build());
         } catch (IOException | ExecutionException | InterruptedException e) {
